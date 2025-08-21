@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Career Recommendations</title>
+  <style>
+    body { font-family: Arial; padding: 40px; }
+    .result-box {
+      background: #e1f5fe;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Suggested Career Paths</h2>
+  <div class="result-box" id="resultArea"></div>
+
+  <script>
+    const marks = JSON.parse(localStorage.getItem("marksData"));
+    const resultDiv = document.getElementById("resultArea");
+
+    if (!marks) {
+      resultDiv.innerHTML = "<p><strong>Error:</strong> No marks data found. Please go back and upload your marks card again.</p>";
+    } else {
+      let suggestion = "";
+
+      if (marks.Mathematics >= 80 && marks.Science >= 75) {
+        suggestion = "You are suitable for Computer Science / Engineering / Data Science.";
+      } else if (marks.English >= 85) {
+        suggestion = "Consider Journalism, Law, or Arts-based fields.";
+      } else {
+        suggestion = "Consider General Degree courses like BBA, BCA, or B.Com.";
+      }
+
+      resultDiv.innerHTML = `
+        <p><strong>Extracted Marks:</strong></p>
+        <ul>
+          <li>Mathematics: ${marks.Mathematics}</li>
+          <li>Science: ${marks.Science}</li>
+          <li>English: ${marks.English}</li>
+        </ul>
+        <p><strong>Recommendation:</strong> ${suggestion}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

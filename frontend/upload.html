@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Marks Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f4f4f4;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Upload Your Marks Card</h2>
+    <input type="file" id="marksFile" accept="image/*">
+    <br><br>
+    <button onclick="uploadFile()">Upload & Process</button>
+
+    <div id="status"></div>
+
+    <div class="output">
+        <h3>Extracted Marks:</h3>
+        <p>Mathematics: <span id="mathMarks">N/A</span></p>
+        <p>Science: <span id="scienceMarks">N/A</span></p>
+        <p>English: <span id="englishMarks">N/A</span></p>
+
+        <h3>Recommendation:</h3>
+        <p id="recommendation">N/A</p>
+    </div>
+</div>
+
+<script>
+    function uploadFile() {
+        let fileInput = document.getElementById("marksFile");
+        let statusDiv = document.getElementById("status");
+
+        if (!fileInput.files.length) {
+            statusDiv.innerHTML = "<p class='error'>Please select a file first!</p>";
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        statusDiv.innerHTML = "Uploading & Processing...";
+
+        fetch("http://localhost:8080/image", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Response from backend:", data);
+
+            if (data.error) {
+                statusDiv.innerHTML = `<p class='error'>${data.error}</p>`;
+                return;
+            }
+
+            statusDiv.innerHTML = "Processing Complete ✅";
+
+            // Clear old results
+            let outputDiv = document.querySelector(".output");
+            outputDiv.innerHTML = "<h3>Extracted Marks:</h3>";
+
+            // Dynamically add each subject and marks
+            for (let subject in data) {
+                if (data.hasOwnProperty(subject) && subject !== "Recommendation") {
+                    let p = document.createElement("p");
+                    p.textContent = `${subject}: ${data[subject]}`;
+                    outputDiv.appendChild(p);
+                }
+            }
+
+            // Add recommendation separately
+            if (data.Recommendation) {
+                let rec = document.createElement("p");
+                rec.textContent = `Recommendation: ${data.Recommendation}`;
+                outputDiv.appendChild(rec);
+            }
+        })
+
+
+    }
+</script>
+</body>
+</html>

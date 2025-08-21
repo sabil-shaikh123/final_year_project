@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Career Quiz</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 40px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Interest & Aptitude Quiz</h2>
+
+  <div class="question">
+    <p>1. Do you enjoy solving logic problems?</p>
+    <input type="radio" name="q1" value="yes"> Yes
+    <input type="radio" name="q1" value="no"> No
+  </div>
+
+  <div class="question">
+    <p>2. Are you interested in drawing or designing?</p>
+    <input type="radio" name="q2" value="yes"> Yes
+    <input type="radio" name="q2" value="no"> No
+  </div>
+
+  <div class="question">
+    <p>3. Do you prefer working with people or machines?</p>
+    <input type="radio" name="q3" value="people"> People
+    <input type="radio" name="q3" value="machines"> Machines
+  </div>
+
+  <button onclick="submitQuiz()">Submit Quiz</button>
+
+  <script>
+    function submitQuiz() {
+      const answers = {
+        q1: document.querySelector('input[name="q1"]:checked')?.value,
+        q2: document.querySelector('input[name="q2"]:checked')?.value,
+        q3: document.querySelector('input[name="q3"]:checked')?.value,
+      };
+
+      if (answers.q1 && answers.q2 && answers.q3) {
+        // Save to localStorage or send to backend
+        alert("Thank you! Your responses are saved.");
+        window.location.href = "upload.html"; // next step: marks upload
+      } else {
+        alert("Please answer all questions.");
+      }
+    }
+  </script>
+</body>
+</html>
