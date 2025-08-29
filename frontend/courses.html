@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 36px;
+      color: #333;
+    }
+
+    .courses-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .course-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .course-card h2 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .course-details {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .course-details span {
+      font-weight: bold;
+      color: #111;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+    }
+
+    .back-btn {
+      display: block;
+      margin: 40px auto 0;
+      background: #555;
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      background: #333;
+    }
+
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      animation: fadeInScale 0.4s ease;
+    }
+
+    .modal h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .modal p {
+      margin-bottom: 10px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .close {
+      float: right;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Available Courses</h1>
+
+  <div class="courses-container">
+    <div class="course-card">
+      <h2>Bachelor of Technology (B.Tech)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 4 Years</p>
+        <p><span>Eligibility:</span> 10+2 with PCM</p>
+        <p><span>Fees:</span> ₹1,20,000 / year</p>
+        <p><span>Seats:</span> 180</p>
+      </div>
+      <button class="btn" onclick="openModal('B.Tech','CSE, ECE, Mechanical, Civil branches available. Focus on innovation, labs and research opportunities.')">View More</button>
+    </div>
+
+    <div class="course-card">
+      <h2>Master of Technology (M.Tech)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 2 Years</p>
+        <p><span>Eligibility:</span> B.Tech / BE</p>
+        <p><span>Fees:</span> ₹1,50,000 / year</p>
+        <p><span>Seats:</span> 60</p>
+      </div>
+      <button class="btn" onclick="openModal('M.Tech','Advanced technical specialization with project-based learning and research.')">View More</button>
+    </div>
+
+    <div class="course-card">
+      <h2>Bachelor of Business Administration (BBA)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 3 Years</p>
+        <p><span>Eligibility:</span> 10+2 any stream</p>
+        <p><span>Fees:</span> ₹80,000 / year</p>
+        <p><span>Seats:</span> 120</p>
+      </div>
+      <button class="btn" onclick="openModal('BBA','Covers finance, marketing, HR, and entrepreneurship skills for management careers.')">View More</button>
+    </div>
+
+    <div class="course-card">
+      <h2>Master of Business Administration (MBA)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 2 Years</p>
+        <p><span>Eligibility:</span> Graduation</p>
+        <p><span>Fees:</span> ₹2,00,000 / year</p>
+        <p><span>Seats:</span> 90</p>
+      </div>
+      <button class="btn" onclick="openModal('MBA','Industry-focused program with internships, leadership training, and placements.')">View More</button>
+    </div>
+
+    <div class="course-card">
+      <h2>Bachelor of Computer Applications (BCA)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 3 Years</p>
+        <p><span>Eligibility:</span> 10+2 with Mathematics</p>
+        <p><span>Fees:</span> ₹95,000 / year</p>
+        <p><span>Seats:</span> 100</p>
+      </div>
+      <button class="btn" onclick="openModal('BCA','Learn programming, databases, web development and networking fundamentals.')">View More</button>
+    </div>
+
+    <div class="course-card">
+      <h2>Master of Computer Applications (MCA)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 2 Years</p>
+        <p><span>Eligibility:</span> Graduation with Mathematics</p>
+        <p><span>Fees:</span> ₹1,80,000 / year</p>
+        <p><span>Seats:</span> 80</p>
+      </div>
+      <button class="btn" onclick="openModal('MCA','Focuses on advanced programming, software engineering, AI, and cloud computing.')">View More</button>
+    </div>
+
+    <div class="course-card">
+      <h2>Bachelor of Science (B.Sc)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 3 Years</p>
+        <p><span>Eligibility:</span> 10+2 Science</p>
+        <p><span>Fees:</span> ₹70,000 / year</p>
+        <p><span>Seats:</span> 150</p>
+      </div>
+      <button class="btn" onclick="openModal('B.Sc','Specializations in Physics, Chemistry, Mathematics, and Computer Science.')">View More</button>
+    </div>
+
+    <div class="course-card">
+      <h2>Master of Science (M.Sc)</h2>
+      <div class="course-details">
+        <p><span>Duration:</span> 2 Years</p>
+        <p><span>Eligibility:</span> B.Sc Degree</p>
+        <p><span>Fees:</span> ₹1,20,000 / year</p>
+        <p><span>Seats:</span> 60</p>
+      </div>
+      <button class="btn" onclick="openModal('M.Sc','Advanced research program in core science fields with thesis and labs.')">View More</button>
+    </div>
+  </div>
+
+  <a href="index.html" class="btn back-btn">⬅ Back to Home</a>
+
+  <!-- Modal -->
+  <div class="modal" id="courseModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(title, description) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalDescription").innerText = description;
+      document.getElementById("courseModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("courseModal").style.display = "none";
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById("courseModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

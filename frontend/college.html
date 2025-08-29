@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Details</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+      color: white;
+    }
+
+    /* Navbar */
+    nav {
+      background: rgba(0,0,0,0.7);
+      padding: 15px;
+      display: flex;
+      justify-content: space-around;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #fdbb2d;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      background: #333;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      color: white;
+      border-radius: 8px;
+      transition: 0.3s;
+      margin: 5px;
+    }
+    .tabs button:hover, .tabs button.active {
+      background: #fdbb2d;
+      color: black;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    th {
+      background: rgba(0,0,0,0.6);
+    }
+    tr:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Review Button */
+    .review-btn {
+      background: #fdbb2d;
+      color: black;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .review-btn:hover {
+      background: #ffcc66;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 12px;
+      width: 400px;
+      text-align: center;
+    }
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .modal-content button {
+      background: #1a2a6c;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal-content button:hover {
+      background: #333;
+    }
+
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+      color: red;
+    }
+
+    /* Back Button */
+    .back-home {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #333;
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      width: 150px;
+      transition: 0.3s;
+    }
+    .back-home:hover {
+      background: #fdbb2d;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="college.html">Colleges</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <div class="container">
+    <h1>College Name</h1>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tablink active" onclick="openTab(event, 'courses')">Courses</button>
+      <button class="tablink" onclick="openTab(event, 'fees')">Fees</button>
+      <button class="tablink" onclick="openTab(event, 'cutoffs')">Cutoffs</button>
+      <button class="tablink" onclick="openTab(event, 'placements')">Placements</button>
+      <button class="tablink" onclick="openTab(event, 'rankings')">Rankings</button>
+      <button class="tablink" onclick="openTab(event, 'reviews')">Reviews</button>
+    </div>
+
+    <!-- Content -->
+    <div id="courses" class="tab-content active">
+      <h2>Courses Offered</h2>
+      <table>
+        <tr><th>Course</th><th>Duration</th><th>Eligibility</th></tr>
+        <tr><td>B.Tech (CSE)</td><td>4 Years</td><td>12th + Entrance Exam</td></tr>
+        <tr><td>MBA</td><td>2 Years</td><td>Graduation + CAT/MAT</td></tr>
+        <tr><td>B.Sc (Physics)</td><td>3 Years</td><td>12th Science</td></tr>
+      </table>
+    </div>
+
+    <div id="fees" class="tab-content">
+      <h2>Fee Structure</h2>
+      <table>
+        <tr><th>Course</th><th>Annual Fees</th></tr>
+        <tr><td>B.Tech (CSE)</td><td>₹2,50,000</td></tr>
+        <tr><td>MBA</td><td>₹3,00,000</td></tr>
+        <tr><td>B.Sc</td><td>₹80,000</td></tr>
+      </table>
+    </div>
+
+    <div id="cutoffs" class="tab-content">
+      <h2>Cutoff Details</h2>
+      <table>
+        <tr><th>Exam</th><th>Cutoff</th></tr>
+        <tr><td>JEE Mains</td><td>95 Percentile</td></tr>
+        <tr><td>CET</td><td>90 Percentile</td></tr>
+        <tr><td>CAT (MBA)</td><td>85 Percentile</td></tr>
+      </table>
+    </div>
+
+    <div id="placements" class="tab-content">
+      <h2>Placement Statistics</h2>
+      <table>
+        <tr><th>Company</th><th>Average Package</th><th>Highest Package</th></tr>
+        <tr><td>Google</td><td>₹25 LPA</td><td>₹45 LPA</td></tr>
+        <tr><td>TCS</td><td>₹6 LPA</td><td>₹12 LPA</td></tr>
+        <tr><td>Infosys</td><td>₹5 LPA</td><td>₹10 LPA</td></tr>
+      </table>
+    </div>
+
+    <div id="rankings" class="tab-content">
+      <h2>Rankings</h2>
+      <ul>
+        <li>NIRF India: Rank 15 (2024)</li>
+        <li>Outlook Ranking: Rank 10 (2024)</li>
+        <li>Times Higher Education: Top 500 Global Universities</li>
+      </ul>
+    </div>
+
+    <div id="reviews" class="tab-content">
+      <h2>Student Reviews</h2>
+      <p>⭐⭐⭐⭐☆ - Great faculty and placements.</p>
+      <button class="review-btn" onclick="openModal()">Give Your Review</button>
+    </div>
+
+    <a href="index.html" class="back-home">⬅ Back to Home</a>
+  </div>
+
+  <!-- Review Modal -->
+  <div class="modal" id="reviewModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Submit Your Review</h2>
+      <input type="text" placeholder="Your Name">
+      <textarea rows="4" placeholder="Write your review..."></textarea>
+      <button onclick="closeModal()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    // Tabs
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Modal
+    function openModal() {
+      document.getElementById("reviewModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("reviewModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
